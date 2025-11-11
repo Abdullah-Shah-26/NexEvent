@@ -1,9 +1,5 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
-/**
- * TypeScript interface for User document
- * Extends Document to include Mongoose document properties
- */
 export interface IUser extends Document {
   name: string;
   email: string;
@@ -11,10 +7,6 @@ export interface IUser extends Document {
   updatedAt: Date;
 }
 
-/**
- * Mongoose schema definition for User
- * Defines the structure and validation rules for user documents
- */
 const UserSchema = new Schema<IUser>(
   {
     name: {

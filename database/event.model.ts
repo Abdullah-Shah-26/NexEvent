@@ -1,8 +1,5 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import mongoose, { Schema, Model, Document } from "mongoose";
 
-/**
- * TypeScript interface for Event document
- */
 export interface IEvent extends Document {
   title: string;
   slug: string;
@@ -22,17 +19,14 @@ export interface IEvent extends Document {
   updatedAt: Date;
 }
 
-/**
- * Event schema definition with validation rules
- */
-const EventSchema = new Schema<IEvent>(
+const EventSchema = new Schema(
   {
     title: {
       type: String,
-      required: [true, 'Title is required'],
+      required: [true, "Title is required"],
       trim: true,
-      minlength: [3, 'Title must be at least 3 characters long'],
-      maxlength: [200, 'Title cannot exceed 200 characters'],
+      minlength: [3, "Title must be at least 3 characters long"],
+      maxlength: [200, "Title cannot exceed 200 characters"],
     },
     slug: {
       type: String,
@@ -42,75 +36,71 @@ const EventSchema = new Schema<IEvent>(
     },
     description: {
       type: String,
-      required: [true, 'Description is required'],
+      required: [true, "Description is required"],
       trim: true,
-      minlength: [10, 'Description must be at least 10 characters long'],
+      minlength: [10, "Description must be at least 10 characters long"],
     },
     overview: {
       type: String,
-      required: [true, 'Overview is required'],
+      required: [true, "Overview is required"],
       trim: true,
     },
     image: {
       type: String,
-      required: [true, 'Image URL is required'],
+      required: [true, "Image URL is required"],
       trim: true,
     },
     venue: {
       type: String,
-      required: [true, 'Venue is required'],
+      required: [true, "Venue is required"],
       trim: true,
     },
     location: {
       type: String,
-      required: [true, 'Location is required'],
+      required: [true, "Location is required"],
       trim: true,
     },
     date: {
       type: String,
-      required: [true, 'Date is required'],
+      required: [true, "Date is required"],
     },
     time: {
       type: String,
-      required: [true, 'Time is required'],
+      required: [true, "Time is required"],
     },
     mode: {
       type: String,
-      required: [true, 'Mode is required'],
-      enum: {
-        values: ['online', 'offline', 'hybrid'],
-        message: 'Mode must be one of: online, offline, hybrid',
-      },
-      lowercase: true,
+      required: [true, "Mode is required"],
+      trim: true,
     },
     audience: {
       type: String,
-      required: [true, 'Audience is required'],
+      required: [true, "Audience is required"],
       trim: true,
     },
     agenda: {
       type: [String],
-      required: [true, 'Agenda is required'],
+      required: [true, "Agenda is required"],
       validate: {
         validator: function (arr: string[]) {
           return arr.length > 0;
         },
-        message: 'Agenda must contain at least one item',
+        message: "Agenda must contain at least one item",
       },
     },
     organizer: {
       type: String,
-      required: [true, 'Organizer is required'],
+      required: [true, "Organizer is required"],
       trim: true,
     },
     tags: {
       type: [String],
-      required: [true, 'Tags are required'],
+      required: [true, "Tags are required"],
       validate: {
         validator: function (arr: string[]) {
           return arr.length > 0;
         },
-        message: 'At least one tag is required',
+        message: "At least one tag is required",
       },
     },
   },
@@ -119,25 +109,24 @@ const EventSchema = new Schema<IEvent>(
   }
 );
 
-/**
- * Pre-save hook to generate slug and normalize date/time
- * Runs before document is saved to database
- */
-EventSchema.pre('save', async function (next) {
-  // Generate slug only if title is new or modified
-  if (this.isModified('title')) {
+EventSchema.pre("save", async function (next) {
+  if (this.isModified("title")) {
     const baseSlug = this.title
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-'); // Replace multiple hyphens with single hyphen
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
 
     let uniqueSlug = baseSlug;
     let counter = 1;
 
-    // Ensure slug uniqueness by appending counter if needed
-    while (await mongoose.models.Event.findOne({ slug: uniqueSlug, _id: { $ne: this._id } })) {
+    while (
+      await mongoose.models.Event.findOne({
+        slug: uniqueSlug,
+        _id: { $ne: this._id },
+      })
+    ) {
       uniqueSlug = `${baseSlug}-${counter}`;
       counter++;
     }
@@ -145,46 +134,33 @@ EventSchema.pre('save', async function (next) {
     this.slug = uniqueSlug;
   }
 
-  // Normalize and validate date format
-  if (this.isModified('date')) {
+  if (this.isModified("date")) {
     const dateStr = this.date.trim();
-    
-    // Try to parse and normalize date to ISO format
     const parsedDate = new Date(dateStr);
-    
+
     if (isNaN(parsedDate.getTime())) {
-      // If not parseable, keep original but validate it's not empty
       if (!dateStr) {
-        return next(new Error('Date cannot be empty'));
+        return next(new Error("Date cannot be empty"));
       }
     }
   }
 
-  // Normalize time format (trim whitespace)
-  if (this.isModified('time')) {
+  if (this.isModified("time")) {
     this.time = this.time.trim();
-    
+
     if (!this.time) {
-      return next(new Error('Time cannot be empty'));
+      return next(new Error("Time cannot be empty"));
     }
   }
 
   next();
 });
 
-/**
- * Indexes for optimized queries
- */
-EventSchema.index({ slug: 1 }); // Unique index on slug
-EventSchema.index({ date: 1 }); // Index for date-based queries
-EventSchema.index({ tags: 1 }); // Index for tag-based filtering
-EventSchema.index({ mode: 1 }); // Index for mode filtering
+EventSchema.index({ date: 1 });
+EventSchema.index({ tags: 1 });
+EventSchema.index({ mode: 1 });
 
-/**
- * Export Event model with singleton pattern
- * Prevents model recompilation in development
- */
 const Event: Model<IEvent> =
-  mongoose.models.Event || mongoose.model<IEvent>('Event', EventSchema);
+  mongoose.models.Event || mongoose.model<IEvent>("Event", EventSchema);
 
 export default Event;

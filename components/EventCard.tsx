@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { MapPin, Calendar, Clock } from "lucide-react";
+
 interface Props {
   title: string;
   image: string;
@@ -10,41 +12,30 @@ interface Props {
 }
 
 const EventCard = ({ title, image, slug, location, date, time }: Props) => {
+  const imageSrc = image || "/images/placeholder-event.jpg";
+
   return (
     <Link href={`/events/${slug}`} id="event-card">
       <Image
-        src={image}
+        src={imageSrc}
         alt={title}
         width={410}
         height={300}
         className="poster"
+        unoptimized
+        loading="lazy"
       />
       <div className="flex flex-row gap-2">
-        <Image
-          src="/icons/pin.svg"
-          alt="location"
-          width={14}
-          height={14}
-        ></Image>
+        <MapPin className="w-3.5 h-3.5" />
         <p>{location}</p>
       </div>
 
       <p className="title">{title} </p>
       <div className="datetime">
         <div>
-          <Image
-            src="/icons/calendar.svg"
-            alt="location"
-            width={14}
-            height={14}
-          ></Image>
+          <Calendar className="w-3.5 h-3.5" />
           <p>{date}</p>
-          <Image
-            src="/icons/clock.svg"
-            alt="location"
-            width={14}
-            height={14}
-          ></Image>
+          <Clock className="w-3.5 h-3.5" />
           <p>{time}</p>
         </div>
       </div>

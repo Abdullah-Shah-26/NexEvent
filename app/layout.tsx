@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 import LightRays from "@/components/LightRays";
@@ -16,8 +17,11 @@ const geistMono = Martian_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DevEvent",
-  description: "The Hub for Every Dev Event You Mustn't Miss",
+  title: "NexEvent",
+  description: "",
+  icons: {
+    icon: "/icons/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -29,11 +33,13 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={`${schibstedGrotesk.variable} ${geistMono.variable} min-h-screen antialiased`}
-      ><Navbar></Navbar>
-        <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
+      >
+        <Navbar></Navbar>
+        <Toaster position="top-center" richColors />
+        <div className="absolute inset-0 top-0 z-[-1] min-h-screen light-rays-container">
           <LightRays
-            raysOrigin="top-center-offset"
-            raysColor="#00ffff"
+            raysOrigin="top-center"
+            raysColor="#a855f7"
             raysSpeed={1.0}
             lightSpread={0.9}
             rayLength={1.4}
@@ -43,7 +49,7 @@ export default function RootLayout({
             distortion={0.01}
           />
         </div>
-        
+
         <main>{children}</main>
       </body>
     </html>
