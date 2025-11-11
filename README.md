@@ -2,6 +2,28 @@
 
 A full-stack platform for discovering developer events. Browse hackathons, meetups & conferences, book your spot, or create your own event.
 
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](./screenshots/Home.png)
+
+### Events Page
+
+![Events Page](./screenshots/AllEvents.png)
+
+### Event Details
+
+![Event Details](./screenshots/EventDetails1.png)
+
+### Event Details (Scrolled)
+
+![Event Details Scrolled](./screenshots/EventDetails2.png)
+
+### Create Event
+
+![Event Actions](./screenshots/AddEvent.png)
+
 ## ✨ Features
 
 - 🎯 Browse and discover tech events
@@ -93,7 +115,6 @@ my-app/
 
 5. **Open [http://localhost:3000](http://localhost:3000)**
 
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -109,5 +130,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 This project is open source and available under the [MIT License](LICENSE).
 ```
-***
+
+---
+
 ⭐ If you like this project, please give it a star!
