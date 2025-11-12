@@ -2,14 +2,24 @@ import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
 import { IEvent } from "@/database";
 
+export const dynamic = "force-dynamic";
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const page = async () => {
-  const response = await fetch(`${BASE_URL}/api/events`, {
-    cache: "no-store",
-  });
-  const { events } = await response.json();
+  let featuredEvents: IEvent[] = [];
 
-  const featuredEvents = events?.slice(0, 6) || [];
+  try {
+    const response = await fetch(`${BASE_URL}/api/events`, {
+      cache: "no-store",
+    });
+
+    if (response.ok) {
+      const { events } = await response.json();
+      featuredEvents = events?.slice(0, 6) || [];
+    }
+  } catch (error) {
+    console.error("Failed to fetch events:", error);
+  }
 
   return (
     <div>
