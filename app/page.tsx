@@ -3,23 +3,37 @@ import ExploreBtn from "@/components/ExploreBtn";
 import { IEvent } from "@/database";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const page = async () => {
-  let featuredEvents: IEvent[] = [];
 
+async function getFeaturedEvents(): Promise<IEvent[]> {
   try {
+    if (!BASE_URL) {
+      console.warn("BASE_URL is not defined");
+      return [];
+    }
+
     const response = await fetch(`${BASE_URL}/api/events`, {
       cache: "no-store",
+      next: { revalidate: 0 },
     });
 
-    if (response.ok) {
-      const { events } = await response.json();
-      featuredEvents = events?.slice(0, 6) || [];
+    if (!response.ok) {
+      console.error("Failed to fetch events:", response.status);
+      return [];
     }
+
+    const { events } = await response.json();
+    return events?.slice(0, 6) || [];
   } catch (error) {
-    console.error("Failed to fetch events:", error);
+    console.error("Error fetching events:", error);
+    return [];
   }
+}
+
+const page = async () => {
+  const featuredEvents = await getFeaturedEvents();
 
   return (
     <div>
