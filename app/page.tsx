@@ -1,13 +1,18 @@
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
 import { IEvent } from "@/database";
+import { MOCK_EVENTS } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function getFeaturedEvents(): Promise<IEvent[]> {
+  // TEMPORARY: Using mock data to test rendering
+  return MOCK_EVENTS.slice(0, 6);
+
+  /* COMMENTED OUT - Uncomment after testing
   try {
     if (!BASE_URL) {
       console.warn("BASE_URL is not defined");
@@ -30,6 +35,7 @@ async function getFeaturedEvents(): Promise<IEvent[]> {
     console.error("Error fetching events:", error);
     return [];
   }
+  */
 }
 
 const page = async () => {

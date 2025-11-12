@@ -1,8 +1,11 @@
 import EventCard from "@/components/EventCard";
 import SearchBar from "@/components/SearchBar";
 import { IEvent } from "@/database";
+import { MOCK_EVENTS } from "@/lib/constants";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const dynamic = "force-dynamic";
+
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const EventsPage = async ({
   searchParams,
@@ -11,10 +14,15 @@ const EventsPage = async ({
 }) => {
   const { search } = await searchParams;
 
+  // TEMPORARY: Using mock data
+  const events = MOCK_EVENTS;
+
+  /* COMMENTED OUT - Uncomment after testing
   const response = await fetch(`${BASE_URL}/api/events`, {
     cache: "no-store",
   });
   const { events } = await response.json();
+  */
 
   const filteredEvents = search
     ? events.filter(
