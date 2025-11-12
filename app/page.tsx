@@ -1,41 +1,21 @@
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
 import { IEvent } from "@/database";
-import { MOCK_EVENTS } from "@/lib/constants";
+import connectDB from "@/lib/mongoose";
+import Event from "@/database/event.model";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
 async function getFeaturedEvents(): Promise<IEvent[]> {
-  // TEMPORARY: Using mock data to test rendering
-  return MOCK_EVENTS.slice(0, 6);
-
-  /* COMMENTED OUT - Uncomment after testing
   try {
-    if (!BASE_URL) {
-      console.warn("BASE_URL is not defined");
-      return [];
-    }
-
-    const response = await fetch(`${BASE_URL}/api/events`, {
-      cache: "no-store",
-      next: { revalidate: 0 },
-    });
-
-    if (!response.ok) {
-      console.error("Failed to fetch events:", response.status);
-      return [];
-    }
-
-    const { events } = await response.json();
-    return events?.slice(0, 6) || [];
+    await connectDB();
+    const events = await Event.find().sort({ createdAt: -1 }).limit(6).lean();
+    return JSON.parse(JSON.stringify(events)) as IEvent[];
   } catch (error) {
     console.error("Error fetching events:", error);
     return [];
   }
-  */
 }
 
 const page = async () => {

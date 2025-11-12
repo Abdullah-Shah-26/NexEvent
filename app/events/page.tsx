@@ -1,11 +1,11 @@
 import EventCard from "@/components/EventCard";
 import SearchBar from "@/components/SearchBar";
 import { IEvent } from "@/database";
-import { MOCK_EVENTS } from "@/lib/constants";
+import connectDB from "@/lib/mongoose";
+import Event from "@/database/event.model";
 
 export const dynamic = "force-dynamic";
-
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const revalidate = 0;
 
 const EventsPage = async ({
   searchParams,
@@ -14,15 +14,14 @@ const EventsPage = async ({
 }) => {
   const { search } = await searchParams;
 
-  // TEMPORARY: Using mock data
-  const events = MOCK_EVENTS;
-
-  /* COMMENTED OUT - Uncomment after testing
-  const response = await fetch(`${BASE_URL}/api/events`, {
-    cache: "no-store",
-  });
-  const { events } = await response.json();
-  */
+  let events: IEvent[] = [];
+  try {
+    await connectDB();
+    const dbEvents = await Event.find().sort({ createdAt: -1 }).lean();
+    events = JSON.parse(JSON.stringify(dbEvents)) as IEvent[];
+  } catch (error) {
+    console.error("Error fetching events:", error);
+  }
 
   const filteredEvents = search
     ? events.filter(

@@ -4,11 +4,11 @@ import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import EventCard from "@/components/EventCard";
 import { GradientText } from "@/components/ui/gradient-text";
 import EventDetails from "@/components/EventDetails";
-import { MOCK_EVENTS } from "@/lib/constants";
+import connectDB from "@/lib/mongoose";
+import Event from "@/database/event.model";
 
 export const dynamic = "force-dynamic";
-
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const revalidate = 0;
 
 const EventPageDetails = async ({
   params,
@@ -17,15 +17,13 @@ const EventPageDetails = async ({
 }) => {
   const { slug } = await params;
 
-  // TEMPORARY: Using mock data
-  const event = MOCK_EVENTS.find((e) => e.slug === slug);
-
-  /* COMMENTED OUT - Uncomment after testing
-  const request = await fetch(`${BASE_URL}/api/events/${slug}`, {
-    cache: "no-store",
-  });
-  const { event } = await request.json();
-  */
+  let event = null;
+  try {
+    await connectDB();
+    event = await Event.findOne({ slug }).lean();
+  } catch (error) {
+    console.error("Error fetching event:", error);
+  }
 
   if (!event) {
     return notFound();
@@ -47,12 +45,7 @@ const EventPageDetails = async ({
 
   const bookings = 10;
 
-  // TEMPORARY: Mock similar events
-  const similarEvents = MOCK_EVENTS.filter((e) => e.slug !== slug).slice(0, 3);
-
-  /* COMMENTED OUT - Uncomment after testing
   const similarEvents = await getSimilarEventsBySlug(slug);
-  */
 
   return (
     <section id="event">
