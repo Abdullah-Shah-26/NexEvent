@@ -1,16 +1,15 @@
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
 import { IEvent } from "@/database";
-import events from '../lib/constants'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const page = async () => {
-  // const response = await fetch(`${BASE_URL}/api/events`, {
-  //   cache: "no-store",
-  // });
-  // const { events } = await response.json();
+  const response = await fetch(`${BASE_URL}/api/events`, {
+    cache: "no-store",
+  });
+  const { events } = await response.json();
 
-  // const featuredEvents = events?.slice(0, 6) || [];
+  const featuredEvents = events?.slice(0, 6) || [];
 
   return (
     <div>
