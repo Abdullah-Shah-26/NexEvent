@@ -68,7 +68,7 @@ const EventPageDetails = async ({
           agenda={agenda}
           organizer={organizer}
           tags={tags}
-          eventId={event._id}
+          eventId={event._id.toString()}
           slug={slug}
         />
         <aside className="booking">
@@ -83,7 +83,7 @@ const EventPageDetails = async ({
             )}
 
             <BookEvent
-              eventId={event._id}
+              eventId={event._id.toString()}
               slug={event.slug}
               title={event.title}
               description={description}
