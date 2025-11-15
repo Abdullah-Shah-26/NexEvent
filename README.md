@@ -2,6 +2,15 @@
 
 Event management platform for the developer community. Browse hackathons, meetups, & conferences, or create and manage your own events.
 
+🔗 **Live Demo:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
+
+## 🎥 Demo Video
+[![NexEvent Demo](https://img.youtube.com/vi/K6a8aNuHI7w/maxresdefault.jpg)](https://www.youtube.com/watch?v=K6a8aNuHI7w)
+
+*Click to watch the full walkthrough*
+
+---
+
 ## Tech Stack
 
 - **Next.js 16** (App Router) + TypeScript
