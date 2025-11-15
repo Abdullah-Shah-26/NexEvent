@@ -373,15 +373,48 @@
       @apply relative flex items-center gap-2 bg-dark-200 rounded-lg border border-border-dark p-2;
 
       .search-icon {
-        @apply w-5 h-5 text-light-200 ml-2;
+        @apply w-5 h-5 text-light-200 ml-2 shrink-0;
       }
 
       .search-input {
-        @apply flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-light-200 px-2;
+        @apply flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-light-200 px-2 min-w-0;
       }
 
-      .search-button {
-        @apply bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2 rounded-md font-semibold transition-colors;
+      .search-actions {
+        @apply flex items-center gap-2 shrink-0;
+
+        .filter-icon-button {
+          @apply relative p-2 rounded-md border-none bg-transparent cursor-pointer;
+          color: #9ca3af !important;
+
+          &.active {
+            color: #c084fc !important;
+          }
+
+          &.clear {
+            color: #f87171 !important;
+          }
+
+          .filter-badge {
+            @apply absolute top-1 right-1 w-2 h-2 rounded-full;
+            background: #c084fc !important;
+          }
+
+          svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
+        }
+
+        .search-button {
+          @apply px-6 py-2 rounded-md font-semibold transition-colors whitespace-nowrap;
+          background: white !important;
+          color: black !important;
+
+          &:hover {
+            background: #f3f4f6 !important;
+          }
+        }
       }
     }
   }

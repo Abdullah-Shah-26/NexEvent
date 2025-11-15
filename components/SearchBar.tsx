@@ -1,5 +1,5 @@
 "use client";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -12,8 +12,8 @@ const SearchBar = () => {
     setSearch(searchParams.get("search") || "");
   }, [searchParams]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (search.trim()) {
       router.push(`/events?search=${encodeURIComponent(search.trim())}`);
     } else {
@@ -27,14 +27,18 @@ const SearchBar = () => {
         <Search className="search-icon" />
         <input
           type="text"
-          placeholder="Search events by title, description, or tags..."
+          placeholder="Search events by title, location, tags..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="search-input"
         />
-        <button type="submit" className="search-button">
-          Search
-        </button>
+
+        <div className="search-actions">
+          {/* Search Button */}
+          <button type="submit" className="search-button">
+            Search
+          </button>
+        </div>
       </div>
     </form>
   );

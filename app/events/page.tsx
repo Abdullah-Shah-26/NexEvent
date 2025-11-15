@@ -25,14 +25,18 @@ const EventsPage = async ({
   }
 
   const filteredEvents = search
-    ? events.filter(
-        (event: IEvent) =>
-          event.title.toLowerCase().includes(search.toLowerCase()) ||
-          event.description.toLowerCase().includes(search.toLowerCase()) ||
+    ? events.filter((event: IEvent) => {
+        const searchLower = search.toLowerCase();
+        return (
+          event.title.toLowerCase().includes(searchLower) ||
+          event.description.toLowerCase().includes(searchLower) ||
+          event.location.toLowerCase().includes(searchLower) ||
+          event.venue.toLowerCase().includes(searchLower) ||
           event.tags?.some((tag: string) =>
-            tag.toLowerCase().includes(search.toLowerCase())
+            tag.toLowerCase().includes(searchLower)
           )
-      )
+        );
+      })
     : events;
 
   return (
@@ -61,7 +65,7 @@ const EventsPage = async ({
               ))
             ) : (
               <p className="text-center text-light-200">
-                No events found. Try a different search term.
+                No events found. Try adjusting your filters.
               </p>
             )}
           </ul>
