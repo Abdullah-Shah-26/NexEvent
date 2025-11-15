@@ -64,7 +64,7 @@ const Navbar = () => {
       <nav>
         <div className="relative mx-auto max-w-4xl">
           <motion.div
-            className="absolute -inset-[2px] rounded-lg"
+            className="absolute -inset-[1px] rounded-lg"
             style={{ background: rotatingBg }}
           />
           <div className="navbar-glass-container relative z-10">

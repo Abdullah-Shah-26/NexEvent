@@ -168,7 +168,7 @@
 
     .navbar-glass-container {
       @apply mx-auto max-w-4xl px-6 py-3;
-      background: #1e1b2e;
+      @apply bg-dark-100;
       @apply rounded-lg;
       @apply border-none;
       display: grid;
