@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center bg-background z-50">
       <div className="text-center">
         <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="mt-4 text-light-200">Loading...</p>
