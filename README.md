@@ -18,7 +18,7 @@ Event management platform for the developer community. Browse hackathons, meetup
 - **NextAuth.js v5** for authentication
 - **Cloudinary** for image storage
 - **Tailwind CSS v4** + Radix UI + shadcn/ui
-- **Motion** React Bits + Motion Primitives for animations
+- **Animations** React Bits + Motion Primitives for animations
 - **Lucide React** for icons
 - **date-fns** + React Day Picker for date handling
 - **Zod** for validation
