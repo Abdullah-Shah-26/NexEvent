@@ -5,9 +5,10 @@ Event management platform for the developer community. Browse hackathons, meetup
 🔗 **Live Demo:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
 
 ## 🎥 Demo Video
+
 [![NexEvent Demo](https://img.youtube.com/vi/K6a8aNuHI7w/maxresdefault.jpg)](https://www.youtube.com/watch?v=K6a8aNuHI7w)
 
-*Click to watch the full walkthrough*
+_Click to watch the full walkthrough_
 
 ---
 
@@ -17,8 +18,9 @@ Event management platform for the developer community. Browse hackathons, meetup
 - **MongoDB** with Mongoose ODM
 - **NextAuth.js v5** for authentication
 - **Cloudinary** for image storage
+- **Google Gemini AI** for chatbot assistant
 - **Tailwind CSS v4** + Radix UI + shadcn/ui
-- **Animations** React Bits + Motion Primitives for animations
+- **Animations** React Bits + Motion Primitives + Framer Motion
 - **Lucide React** for icons
 - **date-fns** + React Day Picker for date handling
 - **Zod** for validation
@@ -27,48 +29,52 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 ## How It Works
 
-NexEvent has three main user flows:
-
 - **Browse Events** - Anyone can discover and view events
 - **Create Events** - Organizers can host their own events
 - **Book Events** - Guests can register for events
+- **Save Favourites** - Guests can save events they're interested in
+- **AI Chatbot** - Ask questions about events and get instant answers
 
 ---
 
-##  Security & Performance
+## Security & Performance
 
 ### Security
+
 - **Password hashing** with bcrypt
 - **Session-based authentication** with NextAuth
 - **Role-based access control** (organizer/guest)
 - **Input validation** with Zod on client + server
 
 ### Performance
+
 - **Server Components** render on server (reduced client JS)
 - **Dynamic routes** use force-dynamic for real-time data
 - **MongoDB connection pooling** prevents reconnection overhead
 - **Image optimization** via Cloudinary CDN
 
 ### Development
+
 - **Type-safe** with TypeScript across the stack
 - **Client-side validation** with Zod schemas
-
-
 
 ## Project Structure
 
 ```
 app/
-├── api/                    # RESTful API endpoints
-│   ├── auth/              # NextAuth routes (signin, signup)
+├── api/                   # RESTful API endpoints
+│   ├── auth/              # NextAuth routes
+│   ├── chat/              # AI chatbot endpoint (Gemini)
 │   ├── events/            # Event CRUD operations
-│   └── users/             # User profile management
-├── bookings/              # User bookings page
+│   ├── favorites/         # Favourites management
+│   └── users/             # User profile
+├── bookings/              # User registered events page
+├── favorites/             # User favourites page
 ├── create-event/          # Event creation (protected)
 ├── events/                # Event listing & details
-│   └── [slug]/           # Dynamic event pages
-│       └── edit/         # Event editor
-├── signin/ & signup/      # Authentication pages
+│   └── [slug]/            # Dynamic event pages
+│       └── edit/          # Event editor
+├── signin/ & signup/     # Authentication pages
 ├── layout.tsx            # Root layout
 ├── page.tsx              # Landing page
 └── globals.css           # Global styles
@@ -77,12 +83,14 @@ components/
 ├── form/                 # Form inputs (FormInput, ImageUpload, TagInput)
 ├── ui/                   # shadcn/ui primitives (button, calendar, select)
 ├── motion-primitives/    # Animation components
+├── ChatBot.tsx           # AI chatbot assistant
 └── [features]/           # EventCard, EventForm, BookEvent, Navbar, etc.
 
 database/
 ├── user.model.ts         # User schema
 ├── event.model.ts        # Event schema
-└── booking.model.ts      # Booking schema
+├── booking.model.ts      # Booking schema
+└── favorite.model.ts     # Favourites schema
 
 lib/
 ├── actions/              # Server actions

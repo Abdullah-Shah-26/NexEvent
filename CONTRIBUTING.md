@@ -38,10 +38,15 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
+# Gemini AI (from https://aistudio.google.com/app/apikey)
+GEMINI_API_KEY=your_gemini_api_key
+
 # Optional
 NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
+
+**Note:** The AI chatbot requires a Gemini API key. Get one for free at [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ### Run
 
@@ -53,46 +58,42 @@ pnpm dev  # http://localhost:3000
 
 Want to contribute? Pick a feature you would like to implement & start coding :)
 
-### Foundation Features
+### Quick Wins (Easy to implement)
 
-Build these core features first to establish the user experience:
-
-- **Guest Dashboard**: Personal dashboard showing upcoming events, booking history, saved events, and user profile
-- **Organizer Dashboard**: Comprehensive dashboard for organizers to manage their events, view attendee lists, and track event analytics
-- **User Profiles**: Display user information, interests, skills, and activity history
-- **Event Calendar View**: Display events in calendar format with month/week/day views
-
-### Easy Features
-
-- **Booking Confirmation Email**: Send email when guest books event with event details
 - **Event Capacity**: Add max attendees limit and show "Full" when reached
+- **Loading States**: Add skeleton loaders for better UX
 
-### Medium Features
+### Core Features (Build the foundation)
 
-- **Attendee Management**: Organizers can view and manage event attendees
-- **Event Search**: Full-text search across events with autocomplete
-- **Event Categories**: Organize events by categories and subcategories
-- **Notification System**: In-app notifications for bookings, reminders, and updates
+- **Guest Dashboard**: Overview page showing upcoming events, past events, and favourites
+- **Organizer Dashboard**: Manage events, view registrations, and basic analytics
+- **User Profiles**: Display user info, registered events, and activity
+- **Email Notifications**: Send booking confirmations and event reminders
+- **Event Categories**: Tag system with filtering (Hackathon, Workshop, Conference, etc.)
 
-### Advanced Features
+### Advanced Features (After core is solid)
 
 - **Payment Integration**: Support paid events with Stripe
-- **QR Code Check-in**: Generate QR codes for event entry and attendance tracking
-- **Email Reminders**: Auto-send reminder emails 24hrs before event
-- **Event Analytics**: Detailed insights for organizers on attendance, engagement, and trends
+- **QR Code Check-in**: Generate QR codes for event entry
+- **Event Analytics**: Charts showing registrations, attendance trends
+- **Attendee Networking**: Allow attendees to connect with each other
+- **Event Waitlist**: Join waitlist when event is full
+- **Multi-day Events**: Support for events spanning multiple days
 
-### AI & Innovation Features
+### AI Features (Requires Gemini API)
 
-- **AI Event Recommendations**: Personalized event suggestions based on user interests and behavior
-- **GitHub Skill Dashboard**: Showcase developer skills and contributions from GitHub profile
-- **Gamification System**: XP points, badges, and achievements for user engagement
-- **Team Matchmaking**: Connect developers to form teams for hackathons and events
-- **AI Chat Assistant**: Intelligent chatbot to help users find events and answer questions
-- **Judging System**: Comprehensive judging and scoring system for hackathons
-- **Embeddable Widget**: Shareable event widgets for external websites
-- **Voice Event Creation**: Create events using voice commands
-- **Personality-Based Matching**: AI-powered team matching based on personality traits
-- **Predictive Analytics**: Data insights and predictions for event organizers
+- **Smart Event Recommendations**: AI suggests events based on user history
+- **Event Summaries**: Auto-generate TL;DR for long descriptions
+- **Smart Tags**: Auto-tag events based on content
+- **Chatbot Enhancement**: Make the assistant smarter with context awareness
+
+### Moonshot Ideas (Complex, high impact)
+
+- **GitHub Integration**: Recommend events based on GitHub activity
+- **Team Matchmaking**: AI-powered team formation for hackathons
+- **Gamification**: XP, badges, leaderboards for engagement
+- **Voice Commands**: Create events using voice input
+- **Judging System**: Complete hackathon judging platform
 
 ## Workflow
 
