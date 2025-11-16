@@ -610,3 +610,21 @@
     color: #000000 !important;
   }
 }
+
+/* Custom scrollbar styling for ChatBot message thread */
+.message-thread::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-thread::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.message-thread::-webkit-scrollbar-thumb {
+  background: #1a1230;
+  border-radius: 3px;
+}
+
+.message-thread::-webkit-scrollbar-thumb:hover {
+  background: #2a2240;
+}

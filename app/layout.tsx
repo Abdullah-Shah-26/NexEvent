@@ -6,6 +6,7 @@ import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
 import LightRays from "@/components/LightRays";
 import Navbar from "@/components/Navbar";
+import ChatBot from "@/components/ChatBot";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibstedGrotesk",
@@ -53,6 +54,7 @@ export default function RootLayout({
           </div>
 
           <main>{children}</main>
+          <ChatBot />
         </SessionProvider>
       </body>
     </html>
