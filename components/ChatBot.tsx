@@ -146,7 +146,7 @@ const ChatBot = () => {
               <button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
-                className="bg-purple-600 text-white hover:bg-purple-700 hover:scale-105 active:scale-95 disabled:bg-gray-600 disabled:text-gray-400 disabled:hover:scale-100 disabled:cursor-not-allowed rounded-lg px-4 py-2 transition-all duration-200 font-semibold"
+                className="bg-[#7c3aed] text-white hover:bg-[#6d28d9] hover:scale-105 active:scale-95 disabled:bg-gray-600 disabled:text-gray-400 disabled:hover:scale-100 disabled:cursor-not-allowed rounded-lg px-4 py-2 transition-all duration-200 font-semibold"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4" />

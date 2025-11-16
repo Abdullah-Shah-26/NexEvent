@@ -4,13 +4,21 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Pencil, Trash2, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import ShareEvent from "./ShareEvent";
 
 interface EventActionsProps {
   eventId: string;
   slug: string;
+  title?: string;
+  description?: string;
 }
 
-export default function EventActions({ eventId, slug }: EventActionsProps) {
+export default function EventActions({
+  eventId,
+  slug,
+  title = "",
+  description = "",
+}: EventActionsProps) {
   const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -80,46 +88,52 @@ export default function EventActions({ eventId, slug }: EventActionsProps) {
 
   return (
     <>
-      {!isLoadingRole && isOrganizer && (
-        <div className="flex gap-4 mt-6">
-          <button
-            onClick={handleEdit}
-            className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded font-semibold transition-all duration-300"
-            style={{
-              backgroundColor: "#ffffff",
-              color: "#000000",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(90deg, #C68BFF, #A970FF, #8B55FF)";
-              e.currentTarget.style.color = "#ffffff";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#ffffff";
-              e.currentTarget.style.color = "#000000";
-            }}
-          >
-            <Pencil className="w-4 h-4" />
-            Edit Event
-          </button>
-          <button
-            onClick={handleDeleteClick}
-            className="flex items-center gap-2 bg-purple-900/30 text-white border-2 border-purple-500/50 px-6 py-3 rounded font-semibold transition-all duration-300"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(90deg, #8B55FF, #6C3CFF, #581C87)";
-              e.currentTarget.style.borderColor = "#8B55FF";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(88, 28, 135, 0.3)";
-              e.currentTarget.style.borderColor = "rgba(168, 85, 247, 0.5)";
-            }}
-          >
-            <Trash2 className="w-4 h-4" />
-            Delete Event
-          </button>
-        </div>
-      )}
+      <div className="flex flex-wrap gap-4 mt-6">
+        {/* Share button - visible to everyone */}
+        <ShareEvent title={title} description={description} slug={slug} />
+
+        {/* Edit and Delete buttons - only for organizers */}
+        {!isLoadingRole && isOrganizer && (
+          <>
+            <button
+              onClick={handleEdit}
+              className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded font-semibold transition-all duration-300"
+              style={{
+                backgroundColor: "#ffffff",
+                color: "#000000",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(90deg, #C68BFF, #A970FF, #8B55FF)";
+                e.currentTarget.style.color = "#ffffff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#ffffff";
+                e.currentTarget.style.color = "#000000";
+              }}
+            >
+              <Pencil className="w-4 h-4" />
+              Edit Event
+            </button>
+            <button
+              onClick={handleDeleteClick}
+              className="flex items-center gap-2 bg-purple-900/30 text-white border-2 border-purple-500/50 px-6 py-3 rounded font-semibold transition-all duration-300"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(90deg, #8B55FF, #6C3CFF, #581C87)";
+                e.currentTarget.style.borderColor = "#8B55FF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(88, 28, 135, 0.3)";
+                e.currentTarget.style.borderColor = "rgba(168, 85, 247, 0.5)";
+              }}
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete Event
+            </button>
+          </>
+        )}
+      </div>
 
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (

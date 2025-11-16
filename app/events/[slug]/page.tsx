@@ -70,6 +70,8 @@ const EventPageDetails = async ({
           tags={tags}
           eventId={event._id.toString()}
           slug={slug}
+          title={event.title}
+          description={description}
         />
         <BookEvent
           eventId={event._id.toString()}

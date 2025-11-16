@@ -18,6 +18,8 @@ interface EventDetailsProps {
   tags: string[] | string;
   eventId: string;
   slug: string;
+  title?: string;
+  description?: string;
 }
 
 const EventDetailItem = ({
@@ -97,6 +99,8 @@ export default function EventDetails({
   tags,
   eventId,
   slug,
+  title = "",
+  description = "",
 }: EventDetailsProps) {
   return (
     <div className="content">
@@ -141,7 +145,12 @@ export default function EventDetails({
 
       <EventTags tags={tags} />
 
-      <EventActions eventId={eventId} slug={slug} />
+      <EventActions
+        eventId={eventId}
+        slug={slug}
+        title={title}
+        description={description}
+      />
     </div>
   );
 }

@@ -53,24 +53,47 @@ pnpm dev  # http://localhost:3000
 
 Want to contribute? Pick a feature you would like to implement & start coding :)
 
+### Foundation Features
+
+Build these core features first to establish the user experience:
+
+- **Guest Dashboard**: Personal dashboard showing upcoming events, booking history, saved events, and user profile
+- **Organizer Dashboard**: Comprehensive dashboard for organizers to manage their events, view attendee lists, and track event analytics
+- **User Profiles**: Display user information, interests, skills, and activity history
+- **Event Calendar View**: Display events in calendar format with month/week/day views
+
 ### Easy Features
 
 - **Booking Confirmation Email**: Send email when guest books event with event details
 - **Event Capacity**: Add max attendees limit and show "Full" when reached
-- **Social Sharing**: Share buttons for Twitter, LinkedIn, WhatsApp
+- **Save Events**: Bookmark events for later viewing
 
 ### Medium Features
 
-- **Event Calendar View**: Display events in calendar format
-- **Event Filtering**: Filter by date, mode, location
-- **Save Events**: Bookmark events for later
-- **Attendee List**: Show registered attendees to organizers
+- **Attendee Management**: Organizers can view and manage event attendees
+- **Event Search**: Full-text search across events with autocomplete
+- **Event Categories**: Organize events by categories and subcategories
+- **Notification System**: In-app notifications for bookings, reminders, and updates
 
 ### Advanced Features
 
 - **Payment Integration**: Support paid events with Stripe
-- **QR Code Check-in**: Generate QR codes for event entry
-- **Email Reminders**: Auto-send reminder 24hrs before event
+- **QR Code Check-in**: Generate QR codes for event entry and attendance tracking
+- **Email Reminders**: Auto-send reminder emails 24hrs before event
+- **Event Analytics**: Detailed insights for organizers on attendance, engagement, and trends
+
+### AI & Innovation Features
+
+- **AI Event Recommendations**: Personalized event suggestions based on user interests and behavior
+- **GitHub Skill Dashboard**: Showcase developer skills and contributions from GitHub profile
+- **Gamification System**: XP points, badges, and achievements for user engagement
+- **Team Matchmaking**: Connect developers to form teams for hackathons and events
+- **AI Chat Assistant**: Intelligent chatbot to help users find events and answer questions
+- **Judging System**: Comprehensive judging and scoring system for hackathons
+- **Embeddable Widget**: Shareable event widgets for external websites
+- **Voice Event Creation**: Create events using voice commands
+- **Personality-Based Matching**: AI-powered team matching based on personality traits
+- **Predictive Analytics**: Data insights and predictions for event organizers
 
 ## Workflow
 
