@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Pencil, Trash2, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import ShareEvent from "./ShareEvent";
+import FavoriteButton from "./FavoriteButton";
 
 interface EventActionsProps {
   eventId: string;
@@ -23,6 +24,7 @@ export default function EventActions({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOrganizer, setIsOrganizer] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const [isLoadingRole, setIsLoadingRole] = useState(true);
 
   useEffect(() => {
@@ -35,8 +37,10 @@ export default function EventActions({
         if (response.ok) {
           const data = await response.json();
           setIsOrganizer(data.user?.role === "organizer");
+          setIsGuest(data.user?.role === "guest");
         } else {
           setIsOrganizer(false);
+          setIsGuest(false);
         }
       } catch (error) {
         console.error("EventActions - Error checking role:", error);
@@ -91,6 +95,9 @@ export default function EventActions({
       <div className="flex flex-wrap gap-4 mt-6">
         {/* Share button - visible to everyone */}
         <ShareEvent title={title} description={description} slug={slug} />
+
+        {/* Favorite button - only for guests */}
+        {!isLoadingRole && isGuest && <FavoriteButton eventId={eventId} />}
 
         {/* Edit and Delete buttons - only for organizers */}
         {!isLoadingRole && isOrganizer && (

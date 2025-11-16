@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import CancelBookingButton from "@/components/CancelBookingButton";
 
+
 export default async function BookingsPage() {
   const session = await auth();
-
   if (!session?.user?.email) {
     redirect("/select-role");
   }
@@ -30,12 +30,12 @@ export default async function BookingsPage() {
 
   return (
     <main>
-      <h1 className="mb-8">My Bookings</h1>
+      <h1 className="mb-8">Registered Events</h1>
 
       {bookingsWithEvents.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-light-200 text-xl mb-6">
-            You haven't booked any events yet
+            You haven't registered for any events yet
           </p>
           <Link
             href="/events"

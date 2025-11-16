@@ -101,9 +101,14 @@ const Navbar = () => {
                 </Link>
               )}
               {isSignedIn && !isLoadingRole && userRole === "guest" && (
-                <Link href="/bookings" onMouseEnter={handleMouseEnter}>
-                  Bookings
-                </Link>
+                <>
+                  <Link href="/bookings" onMouseEnter={handleMouseEnter}>
+                    Registered
+                  </Link>
+                  <Link href="/favorites" onMouseEnter={handleMouseEnter}>
+                    Favourites
+                  </Link>
+                </>
               )}
             </ul>
 
@@ -183,7 +188,16 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="mobile-menu">
+        <motion.div
+          className="mobile-menu"
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          transition={{
+            duration: 0.4,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
           <Link href="/" onClick={toggleMenu}>
             Home
           </Link>
@@ -196,9 +210,14 @@ const Navbar = () => {
             </Link>
           )}
           {isSignedIn && !isLoadingRole && userRole === "guest" && (
-            <Link href="/bookings" onClick={toggleMenu}>
-              Bookings
-            </Link>
+            <>
+              <Link href="/bookings" onClick={toggleMenu}>
+                Registered
+              </Link>
+              <Link href="/favorites" onClick={toggleMenu}>
+                Favourites
+              </Link>
+            </>
           )}
           <div className="mobile-auth">
             {isSignedIn ? (
@@ -240,7 +259,7 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-        </div>
+        </motion.div>
       )}
     </header>
   );

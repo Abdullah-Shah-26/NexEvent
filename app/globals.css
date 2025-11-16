@@ -114,6 +114,17 @@
   }
 }
 
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @utility card-shadow {
   box-shadow: 0px 4px 40px 0px #00000066;
 }
@@ -133,6 +144,8 @@
 
   h1 {
     @apply text-gradient text-6xl font-semibold max-sm:text-4xl;
+    line-height: 1.2;
+    padding-bottom: 0.1em;
   }
 
   h3 {
@@ -235,240 +248,242 @@
       @apply md:hidden flex flex-col gap-4 px-5 py-6;
       @apply bg-[#12121280]/50 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-xl;
       @apply mx-5 mt-2 mb-2 border border-white/20;
-
-      a {
-        @apply text-foreground hover:text-purple-400 transition-colors duration-200 text-lg;
-      }
-
-      .mobile-auth {
-        @apply flex items-center justify-center pt-2 border-t border-white/20;
-
-        .sign-in-button {
-          @apply bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors cursor-pointer;
-        }
-      }
-    }
-  }
-
-  .events {
-    @apply grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1 list-none;
-
-    li {
-      @apply list-none;
-    }
-  }
-
-  #event-card {
-    @apply flex flex-col gap-3 transition-all duration-300;
-
-    .poster {
-      @apply h-[300px] w-full rounded-lg object-cover;
+      animation: slideDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-origin: top;
     }
 
-    .title {
-      @apply text-[20px] font-semibold line-clamp-1 text-foreground;
-      position: relative;
-      transition: all 300ms ease-in-out;
+    a {
+      @apply text-foreground hover:text-purple-400 transition-colors duration-200 text-lg;
     }
 
-    &:hover .title {
-      background: linear-gradient(
-        90deg,
-        #c68bff 0%,
-        #a970ff 25%,
-        #8b55ff 50%,
-        #6c3cff 75%,
-        #4f22ff 100%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientShift 3s ease infinite;
-    }
+    .mobile-auth {
+      @apply flex items-center justify-center pt-2 border-t border-white/20;
 
-    &:active .title {
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      @apply text-light-200 text-sm font-light;
-    }
-
-    .datetime {
-      @apply text-light-200 flex flex-row flex-wrap items-center gap-4;
-
-      div {
-        @apply flex flex-row gap-2;
+      .sign-in-button {
+        @apply bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors cursor-pointer;
       }
     }
   }
+}
 
-  #event {
-    .header {
-      @apply flex w-2/3 flex-col items-start gap-4 max-lg:w-full mb-10;
-    }
+.events {
+  @apply grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1 list-none;
 
-    .details {
-      @apply flex w-full flex-col lg:flex-row gap-12 items-start mt-12 max-lg:items-center;
+  li {
+    @apply list-none;
+  }
+}
 
-      .content {
-        @apply flex flex-2 flex-col gap-8 max-lg:w-full lg:max-w-[1000px];
+#event-card {
+  @apply flex flex-col gap-3 transition-all duration-300;
 
-        .banner {
-          @apply max-h-[457px] w-full rounded-lg object-cover;
-        }
+  .poster {
+    @apply h-[300px] w-full rounded-lg object-cover;
+  }
 
-        .agenda {
-          @apply flex flex-col gap-2;
+  .title {
+    @apply text-[20px] font-semibold line-clamp-1 text-foreground;
+    position: relative;
+    transition: all 300ms ease-in-out;
+  }
 
-          ul {
-            li {
-              @apply text-light-100 text-lg max-sm:text-sm;
-            }
-          }
-        }
-      }
+  &:hover .title {
+    background: linear-gradient(
+      90deg,
+      #c68bff 0%,
+      #a970ff 25%,
+      #8b55ff 50%,
+      #6c3cff 75%,
+      #4f22ff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+  }
 
-      .booking {
-        @apply flex-1 w-full p-4 border-l border-gray-700;
+  &:active .title {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 
-        .signup-card {
-          @apply bg-dark-100 border-dark-200 card-shadow flex w-full flex-col gap-6 rounded-[10px] border px-5 py-6;
+  p {
+    @apply text-light-200 text-sm font-light;
+  }
 
-          h2 {
-            @apply text-foreground;
-          }
-        }
-      }
-    }
+  .datetime {
+    @apply text-light-200 flex flex-row flex-wrap items-center gap-4;
 
-    h2 {
-      @apply font-schibsted-grotesk text-2xl font-bold text-foreground hover:text-purple-400 transition-colors duration-300 cursor-default;
-    }
-
-    p {
-      @apply text-light-100 text-lg max-sm:text-sm;
-    }
-
-    .flex-col-gap-2 {
-      @apply flex flex-col gap-2;
-    }
-
-    .flex-row-gap-2 {
+    div {
       @apply flex flex-row gap-2;
     }
   }
+}
 
-  .pill {
-    @apply bg-dark-100 text-light-100 text-xs rounded-[6px] px-5 py-2;
-    @apply transition-all duration-200;
-    @apply hover:bg-black hover:border hover:border-white hover:text-white;
+#event {
+  .header {
+    @apply flex w-2/3 flex-col items-start gap-4 max-lg:w-full mb-10;
   }
 
-  .search-bar {
-    @apply mt-10 w-full max-w-3xl mx-auto;
+  .details {
+    @apply flex w-full flex-col lg:flex-row gap-12 items-start mt-12 max-lg:items-center;
 
-    .search-input-wrapper {
-      @apply relative flex items-center gap-2 bg-dark-200 rounded-lg border border-border-dark p-2;
+    .content {
+      @apply flex flex-2 flex-col gap-8 max-lg:w-full lg:max-w-[1000px];
 
-      .search-icon {
-        @apply w-5 h-5 text-light-200 ml-2 shrink-0;
+      .banner {
+        @apply max-h-[457px] w-full rounded-lg object-cover;
       }
 
-      .search-input {
-        @apply flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-light-200 px-2 min-w-0;
-      }
-
-      .search-actions {
-        @apply flex items-center gap-2 shrink-0;
-
-        .filter-icon-button {
-          @apply relative p-2 rounded-md border-none bg-transparent cursor-pointer;
-          color: #9ca3af !important;
-
-          &.active {
-            color: #c084fc !important;
-          }
-
-          &.clear {
-            color: #f87171 !important;
-          }
-
-          .filter-badge {
-            @apply absolute top-1 right-1 w-2 h-2 rounded-full;
-            background: #c084fc !important;
-          }
-
-          svg {
-            width: 1.25rem !important;
-            height: 1.25rem !important;
-          }
-        }
-
-        .search-button {
-          @apply px-6 py-2 rounded-md font-semibold transition-colors whitespace-nowrap;
-          background: white !important;
-          color: black !important;
-
-          &:hover {
-            background: #f3f4f6 !important;
-          }
-        }
-      }
-    }
-  }
-
-  .add-calendar-button {
-    @apply w-full flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-black px-4 py-2.5 rounded-[6px] font-semibold transition-colors;
-  }
-
-  .calendar-popup-overlay {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50;
-  }
-
-  .calendar-popup {
-    @apply bg-dark-100 border border-border-dark rounded-lg p-6 max-w-md w-full mx-4 space-y-4;
-
-    h3 {
-      @apply text-xl font-bold text-foreground;
-    }
-
-    p {
-      @apply text-light-200;
-    }
-
-    .calendar-popup-actions {
-      @apply flex gap-3 mt-6;
-
-      .calendar-popup-confirm {
-        @apply flex-1 bg-white hover:bg-white/90 text-black px-4 py-2 rounded-md font-semibold transition-colors;
-      }
-
-      .calendar-popup-cancel {
-        @apply flex-1 bg-dark-200 hover:bg-dark-200/80 text-foreground px-4 py-2 rounded-md font-semibold transition-colors;
-      }
-    }
-  }
-
-  #book-event {
-    @apply flex flex-col gap-6;
-
-    form {
-      @apply flex flex-col gap-6;
-
-      div {
+      .agenda {
         @apply flex flex-col gap-2;
 
-        input {
-          @apply bg-dark-200 rounded-[6px] px-5 py-2.5;
+        ul {
+          li {
+            @apply text-light-100 text-lg max-sm:text-sm;
+          }
+        }
+      }
+    }
+
+    .booking {
+      @apply flex-1 w-full p-4 border-l border-gray-700;
+
+      .signup-card {
+        @apply bg-dark-100 border-dark-200 card-shadow flex w-full flex-col gap-6 rounded-[10px] border px-5 py-6;
+
+        h2 {
+          @apply text-foreground;
+        }
+      }
+    }
+  }
+
+  h2 {
+    @apply font-schibsted-grotesk text-2xl font-bold text-foreground hover:text-purple-400 transition-colors duration-300 cursor-default;
+  }
+
+  p {
+    @apply text-light-100 text-lg max-sm:text-sm;
+  }
+
+  .flex-col-gap-2 {
+    @apply flex flex-col gap-2;
+  }
+
+  .flex-row-gap-2 {
+    @apply flex flex-row gap-2;
+  }
+}
+
+.pill {
+  @apply bg-dark-100 text-light-100 text-xs rounded-[6px] px-5 py-2;
+  @apply transition-all duration-200;
+  @apply hover:bg-black hover:border hover:border-white hover:text-white;
+}
+
+.search-bar {
+  @apply mt-10 w-full max-w-3xl mx-auto;
+
+  .search-input-wrapper {
+    @apply relative flex items-center gap-2 bg-dark-200 rounded-lg border border-border-dark p-2;
+
+    .search-icon {
+      @apply w-5 h-5 text-light-200 ml-2 shrink-0;
+    }
+
+    .search-input {
+      @apply flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-light-200 px-2 min-w-0;
+    }
+
+    .search-actions {
+      @apply flex items-center gap-2 shrink-0;
+
+      .filter-icon-button {
+        @apply relative p-2 rounded-md border-none bg-transparent cursor-pointer;
+        color: #9ca3af !important;
+
+        &.active {
+          color: #c084fc !important;
+        }
+
+        &.clear {
+          color: #f87171 !important;
+        }
+
+        .filter-badge {
+          @apply absolute top-1 right-1 w-2 h-2 rounded-full;
+          background: #c084fc !important;
+        }
+
+        svg {
+          width: 1.25rem !important;
+          height: 1.25rem !important;
         }
       }
 
-      button {
-        @apply bg-primary hover:bg-primary/90 w-full cursor-pointer items-center justify-center rounded-[6px] px-4 py-2.5 text-lg font-semibold text-primary-foreground transition-all duration-200;
+      .search-button {
+        @apply px-6 py-2 rounded-md font-semibold transition-colors whitespace-nowrap;
+        background: white !important;
+        color: black !important;
+
+        &:hover {
+          background: #f3f4f6 !important;
+        }
       }
+    }
+  }
+}
+
+.add-calendar-button {
+  @apply w-full flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-black px-4 py-2.5 rounded-[6px] font-semibold transition-colors;
+}
+
+.calendar-popup-overlay {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50;
+}
+
+.calendar-popup {
+  @apply bg-dark-100 border border-border-dark rounded-lg p-6 max-w-md w-full mx-4 space-y-4;
+
+  h3 {
+    @apply text-xl font-bold text-foreground;
+  }
+
+  p {
+    @apply text-light-200;
+  }
+
+  .calendar-popup-actions {
+    @apply flex gap-3 mt-6;
+
+    .calendar-popup-confirm {
+      @apply flex-1 bg-white hover:bg-white/90 text-black px-4 py-2 rounded-md font-semibold transition-colors;
+    }
+
+    .calendar-popup-cancel {
+      @apply flex-1 bg-dark-200 hover:bg-dark-200/80 text-foreground px-4 py-2 rounded-md font-semibold transition-colors;
+    }
+  }
+}
+
+#book-event {
+  @apply flex flex-col gap-6;
+
+  form {
+    @apply flex flex-col gap-6;
+
+    div {
+      @apply flex flex-col gap-2;
+
+      input {
+        @apply bg-dark-200 rounded-[6px] px-5 py-2.5;
+      }
+    }
+
+    button {
+      @apply bg-primary hover:bg-primary/90 w-full cursor-pointer items-center justify-center rounded-[6px] px-4 py-2.5 text-lg font-semibold text-primary-foreground transition-all duration-200;
     }
   }
 }

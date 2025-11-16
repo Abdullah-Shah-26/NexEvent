@@ -66,7 +66,6 @@ Build these core features first to establish the user experience:
 
 - **Booking Confirmation Email**: Send email when guest books event with event details
 - **Event Capacity**: Add max attendees limit and show "Full" when reached
-- **Save Events**: Bookmark events for later viewing
 
 ### Medium Features
 
