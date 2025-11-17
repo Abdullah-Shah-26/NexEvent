@@ -139,7 +139,8 @@
   }
 
   main {
-    @apply mx-auto container flex flex-col sm:px-10 px-5 pt-4 pb-10;
+    @apply mx-auto flex flex-col sm:px-10 px-5 pt-4 pb-10;
+    max-width: 1400px;
   }
 
   h1 {
