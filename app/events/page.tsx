@@ -5,8 +5,7 @@ import connectDB from "@/lib/mongoose";
 import Event from "@/database/event.model";
 import { ScrollProgress } from "@/components/motion-primitives/scroll-progress";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60; // Revalidate every 60 seconds
 
 const EventsPage = async ({
   searchParams,
