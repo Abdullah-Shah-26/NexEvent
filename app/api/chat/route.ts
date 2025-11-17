@@ -2,19 +2,28 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongoose";
 import Event from "@/database/event.model";
+import { chatMessageSchema } from "@/lib/validations/chat.validation";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "demo-key");
 
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json();
+    const body = await req.json();
+    const validation = chatMessageSchema.safeParse(body);
 
-    if (!message) {
+    if (!validation.success) {
+      const firstError = validation.error.issues[0];
       return NextResponse.json(
-        { error: "Message is required" },
+        {
+          error: "Validation Error",
+          message: firstError.message,
+          field: firstError.path.join("."),
+        },
         { status: 400 }
       );
     }
+
+    const { message } = validation.data;
 
     console.log("Connecting to database...");
     await connectDB();

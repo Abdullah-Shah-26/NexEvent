@@ -2,24 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/mongoose";
 import { User } from "@/database";
+import { userRegistrationSchema } from "@/lib/validations/user.validation";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password, name, role } = await req.json();
+    const body = await req.json();
+    const validation = userRegistrationSchema.safeParse(body);
 
-    if (!email || !password || !role) {
+    if (!validation.success) {
+      const firstError = validation.error.issues[0];
       return NextResponse.json(
-        { message: "Email, password, and role are required" },
+        {
+          message: "Validation Error",
+          error: firstError.message,
+          field: firstError.path.join("."),
+        },
         { status: 400 }
       );
     }
 
-    if (!["guest", "organizer"].includes(role)) {
-      return NextResponse.json(
-        { message: "Invalid role. Must be 'guest' or 'organizer'" },
-        { status: 400 }
-      );
-    }
+    const { email, password, name, role } = validation.data;
 
     await connectDB();
 
@@ -37,9 +39,9 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
-      email: email.toLowerCase(),
+      email,
       password: hashedPassword,
-      name: name || "",
+      name,
       role,
     });
 

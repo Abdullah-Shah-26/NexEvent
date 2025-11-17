@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongoose";
 import { Favorite, User } from "@/database";
 import { auth } from "@/auth";
+import {
+  favoriteCreateSchema,
+  favoriteDeleteSchema,
+} from "@/lib/validations/favorite.validation";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,14 +25,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    const { eventId } = await req.json();
+    const body = await req.json();
+    const validation = favoriteCreateSchema.safeParse(body);
 
-    if (!eventId) {
+    if (!validation.success) {
+      const firstError = validation.error.issues[0];
       return NextResponse.json(
-        { message: "Event ID is required" },
+        {
+          message: "Validation Error",
+          error: firstError.message,
+          field: firstError.path.join("."),
+        },
         { status: 400 }
       );
     }
+
+    const { eventId } = validation.data;
 
     // Check if already favorited
     const existingFavorite = await Favorite.findOne({
@@ -81,10 +93,16 @@ export async function DELETE(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const eventId = searchParams.get("eventId");
+    const validation = favoriteDeleteSchema.safeParse({ eventId });
 
-    if (!eventId) {
+    if (!validation.success) {
+      const firstError = validation.error.issues[0];
       return NextResponse.json(
-        { message: "Event ID is required" },
+        {
+          message: "Validation Error",
+          error: firstError.message,
+          field: firstError.path.join("."),
+        },
         { status: 400 }
       );
     }
