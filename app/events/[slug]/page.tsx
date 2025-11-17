@@ -9,6 +9,7 @@ import Event from "@/database/event.model";
 import { ScrollProgress } from "@/components/motion-primitives/scroll-progress";
 import redis from "@/lib/redis";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 const EventPageDetails = async ({
@@ -18,10 +19,10 @@ const EventPageDetails = async ({
 }) => {
   const { slug } = await params;
 
-  let event = null;
+  let event: any = null;
   try {
     const cacheKey = `event:${slug}`;
-    const cached = await redis.get(cacheKey);
+    const cached = await redis.get<any>(cacheKey);
 
     if (cached) {
       event = cached;

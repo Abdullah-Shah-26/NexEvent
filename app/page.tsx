@@ -6,6 +6,7 @@ import Event from "@/database/event.model";
 import { ScrollProgress } from "@/components/motion-primitives/scroll-progress";
 import redis from "@/lib/redis";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 async function getFeaturedEvents(): Promise<IEvent[]> {
