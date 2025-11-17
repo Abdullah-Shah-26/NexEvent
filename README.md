@@ -8,31 +8,46 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 [![NexEvent Demo](https://img.youtube.com/vi/K6a8aNuHI7w/maxresdefault.jpg)](https://www.youtube.com/watch?v=K6a8aNuHI7w)
 
-_Click to watch the full walkthrough_(Recently added Chatbot Assistance + Favourites + Sharing option)
+_Click to watch the full walkthrough_ (Recently added Chatbot Assistance + Favourites + Sharing option within HackPad TimeFrame)
 
 ---
 
 ## Tech Stack
 
-- **Next.js 16** (App Router) + TypeScript
-- **MongoDB** with Mongoose ODM
-- **NextAuth.js v5** for authentication
-- **Cloudinary** for image storage
-- **Google Gemini AI** for chatbot assistant
-- **Tailwind CSS v4** + Radix UI + shadcn/ui
-- **Animations** React Bits + Motion Primitives + Framer Motion
-- **Lucide React** for icons
-- **date-fns** + React Day Picker for date handling
-- **Zod** for validation
-- **Sonner** for toast notifications
-- **PostHog** for analytics (optional)
+**Core**
+
+- Next.js 16 (App Router) + TypeScript + React 19
+- MongoDB + Mongoose ODM
+- Redis (Upstash) for caching
+- NextAuth.js v5 + bcrypt
+
+**UI/UX**
+
+- Tailwind CSS v4 + Radix UI + shadcn/ui
+- Framer Motion + Motion Primitives
+- Lucide React icons
+- Sonner toast notifications
+
+**Features**
+
+- Google Gemini AI (chatbot)
+- Cloudinary (image CDN)
+- date-fns + React Day Picker
+- Zod validation
+
+**Dev Tools**
+
+- PostHog analytics
+- ESLint + TypeScript
 
 ## How It Works
 
-- **Browse Events** - Anyone can discover and view events
-- **Create Events** - Organizers can host their own events
-- **Book Events** - Guests can register for events
-- **Save Favourites** - Guests can save events they're interested in
+- **Browse Events** - Discover and search events with real-time filtering
+- **Create Events** - Organizers can host and manage their own events
+- **Book Events** - One-click registration with email confirmation
+- **Save Favourites** - Mark events you're interested in
+- **Share Events** - Share to Twitter, LinkedIn, Facebook, or copy link
+- **Calendar Integration** - Add events to Google Calendar
 - **AI Chatbot** - Ask questions about events and get instant answers
 
 ---
@@ -41,68 +56,39 @@ _Click to watch the full walkthrough_(Recently added Chatbot Assistance + Favour
 
 ### Security
 
-- **Password hashing** with bcrypt
-- **Session-based authentication** with NextAuth
-- **Role-based access control** (organizer/guest)
-- **Input validation** with Zod on client + server
+- Session-based auth with NextAuth v5 + bcrypt
+- RBAC with protected routes
+- Defense-in-depth validation (Zod API layer + Mongoose DB layer)
+- Type-safe schemas with runtime validation
 
 ### Performance
 
-- **Server Components** render on server (reduced client JS)
-- **Dynamic routes** use force-dynamic for real-time data
-- **MongoDB connection pooling** prevents reconnection overhead
-- **Image optimization** via Cloudinary CDN
-
-### Development
-
-- **Type-safe** with TypeScript across the stack
-- **Client-side validation** with Zod schemas
+- **Caching**: Redis layer (60s events, 5min pages) - 90% faster
+- **Database**: Connection pooling (50 max), indexes on hot paths
+- **Images**: Cloudinary CDN + Next.js optimization (AVIF/WebP, q_100, dpr_2.0)
+- **Code splitting**: Dynamic imports for heavy components
+- **UI**: Optimistic updates, font display swap
 
 ## Project Structure
 
 ```
 app/
-├── api/                   # RESTful API endpoints
-│   ├── auth/              # NextAuth routes
-│   ├── chat/              # AI chatbot endpoint (Gemini)
-│   ├── events/            # Event CRUD operations
-│   ├── favorites/         # Favourites management
-│   └── users/             # User profile
-├── bookings/              # User registered events page
-├── favorites/             # User favourites page
-├── create-event/          # Event creation (protected)
-├── events/                # Event listing & details
-│   └── [slug]/            # Dynamic event pages
-│       └── edit/          # Event editor
-├── signin/ & signup/     # Authentication pages
-├── layout.tsx            # Root layout
-├── page.tsx              # Landing page
-└── globals.css           # Global styles
+├── api/                  # API routes (auth, chat, events, favorites, users)
+├── (pages)/              # Event pages, bookings, favorites, auth
+└── layout.tsx            # Root layout
 
 components/
-├── form/                 # Form inputs (FormInput, ImageUpload, TagInput)
-├── ui/                   # shadcn/ui primitives (button, calendar, select)
-├── motion-primitives/    # Animation components
-├── ChatBot.tsx           # AI chatbot assistant
-└── [features]/           # EventCard, EventForm, BookEvent, Navbar, etc.
+├── form/                 # Form inputs
+├── ui/                   # shadcn/ui components
+└── [features]/           # EventCard, ChatBot, Navbar, etc.
 
-database/
-├── user.model.ts         # User schema
-├── event.model.ts        # Event schema
-├── booking.model.ts      # Booking schema
-└── favorite.model.ts     # Favourites schema
-
+database/                 # Mongoose models (user, event, booking, favorite)
 lib/
 ├── actions/              # Server actions
-│   ├── event.actions.ts  # Event CRUD logic
-│   └── booking.actions.ts # Booking logic
-├── validations/          # Zod schemas
-├── mongoose.ts           # DB connection
-└── utils.ts              # Helper functions
+├── validations/          # Zod schemas (event, user, booking, favorite, chat)
+└── mongoose.ts           # DB connection
 
 hooks/                    # Custom React hooks
-types/                    # TypeScript definitions
-public/                   # Static assets
 ```
 
 ## Getting Started

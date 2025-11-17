@@ -4,14 +4,26 @@ import { IEvent } from "@/database";
 import connectDB from "@/lib/mongoose";
 import Event from "@/database/event.model";
 import { ScrollProgress } from "@/components/motion-primitives/scroll-progress";
+import redis from "@/lib/redis";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
 
 async function getFeaturedEvents(): Promise<IEvent[]> {
   try {
+    const cacheKey = "events:featured";
+    const cached = await redis.get<IEvent[]>(cacheKey);
+
+    if (cached) {
+      return cached;
+    }
+
     await connectDB();
     const events = await Event.find().sort({ createdAt: -1 }).limit(6).lean();
-    return JSON.parse(JSON.stringify(events)) as IEvent[];
+    const serialized = JSON.parse(JSON.stringify(events)) as IEvent[];
+
+    await redis.setex(cacheKey, 60, serialized);
+
+    return serialized;
   } catch (error) {
     console.error("Error fetching events:", error);
     return [];

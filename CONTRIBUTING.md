@@ -33,20 +33,21 @@ MONGODB_URI=mongodb://localhost:27017/nexevent
 AUTH_SECRET=your-secret-here
 NEXTAUTH_URL=http://localhost:3000
 
-# Cloudinary (from https://cloudinary.com/console)
+# Cloudinary
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Gemini AI (from https://aistudio.google.com/app/apikey)
+# Gemini AI
 GEMINI_API_KEY=your_gemini_api_key
 
-# Optional
-NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
-NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
-```
+# Redis (Upstash)
+UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
 
-**Note:** The AI chatbot requires a Gemini API key. Get one for free at [Google AI Studio](https://aistudio.google.com/app/apikey).
+# Analytics (optional)
+NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
+```
 
 ### Run
 

@@ -7,8 +7,9 @@ import EventDetails from "@/components/EventDetails";
 import connectDB from "@/lib/mongoose";
 import Event from "@/database/event.model";
 import { ScrollProgress } from "@/components/motion-primitives/scroll-progress";
+import redis from "@/lib/redis";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 60;
 
 const EventPageDetails = async ({
   params,
@@ -19,8 +20,18 @@ const EventPageDetails = async ({
 
   let event = null;
   try {
-    await connectDB();
-    event = await Event.findOne({ slug }).lean();
+    const cacheKey = `event:${slug}`;
+    const cached = await redis.get(cacheKey);
+
+    if (cached) {
+      event = cached;
+    } else {
+      await connectDB();
+      event = await Event.findOne({ slug }).lean();
+      if (event) {
+        await redis.setex(cacheKey, 300, event);
+      }
+    }
   } catch (error) {
     console.error("Error fetching event:", error);
   }
