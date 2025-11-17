@@ -8,7 +8,7 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 [![NexEvent Demo](https://img.youtube.com/vi/K6a8aNuHI7w/maxresdefault.jpg)](https://www.youtube.com/watch?v=K6a8aNuHI7w)
 
-_Click to watch the full walkthrough_
+_Click to watch the full walkthrough_(Recently added Chatbot Assistance + Favourites + Sharing option)
 
 ---
 

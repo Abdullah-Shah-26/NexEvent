@@ -93,7 +93,6 @@ Want to contribute? Pick a feature you would like to implement & start coding :)
 - **Team Matchmaking**: AI-powered team formation for hackathons
 - **Gamification**: XP, badges, leaderboards for engagement
 - **Voice Commands**: Create events using voice input
-- **Judging System**: Complete hackathon judging platform
 
 ## Workflow
 
