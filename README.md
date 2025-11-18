@@ -4,13 +4,6 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 🔗 **Live Demo:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
 
-## 🎥 Demo Video
-
-[![NexEvent Demo](https://img.youtube.com/vi/K6a8aNuHI7w/maxresdefault.jpg)](https://www.youtube.com/watch?v=K6a8aNuHI7w)
-
-_Click to watch the full walkthrough_ (Recently added Chatbot Assistance + Favourites + Sharing option within HackPad TimeFrame)
-
----
 
 ## Tech Stack
 
@@ -23,7 +16,7 @@ _Click to watch the full walkthrough_ (Recently added Chatbot Assistance + Favou
 
 **UI/UX**
 
-- Tailwind CSS v4 + Radix UI + shadcn/ui
+- Tailwind CSS v4 + Radix UI + shadcn/ui 
 - Framer Motion + Motion Primitives
 - Lucide React icons
 - Sonner toast notifications
