@@ -84,7 +84,7 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-4 left-4 right-4 md:bottom-6 md:right-6 md:left-auto w-auto md:w-96 h-[80vh] md:h-[500px] bg-dark-100 border border-white/20 rounded-lg shadow-2xl z-50 flex flex-col animate-in slide-in-from-bottom-4 fade-in duration-300">
+        <div className="fixed bottom-4 left-4 right-4 md:bottom-6 md:right-6 md:left-auto w-auto md:w-96 h-[65vh] md:h-[500px] bg-dark-100 border border-white/20 rounded-lg shadow-2xl z-50 flex flex-col animate-in slide-in-from-bottom-4 fade-in duration-300">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-white/20">
             <div className="flex items-center gap-2">
