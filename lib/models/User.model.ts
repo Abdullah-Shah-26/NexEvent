@@ -29,19 +29,12 @@ const UserSchema = new Schema<IUser>(
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true, 
   }
 );
 
-/**
- * Indexes for optimized queries
- */
-UserSchema.index({ email: 1 }); // Index on email for faster lookups
+UserSchema.index({ email: 1 });
 
-/**
- * Export User model with proper TypeScript typing
- * Uses singleton pattern to prevent model recompilation in development
- */
 const User: Model<IUser> =
   mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
 
