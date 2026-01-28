@@ -6,31 +6,17 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 ## Tech Stack
 
-**Core**
-
-- Next.js 16 (App Router) + TypeScript + React 19
-- MongoDB + Mongoose ODM
-- Redis (Upstash) for caching
-- NextAuth.js v5 + bcrypt
-
-**UI/UX**
-
-- Tailwind CSS v4 + Radix UI + shadcn/ui
-- Framer Motion + Motion Primitives
-- Lucide React icons
-- Sonner toast notifications
-
-**Features**
-
-- Google Gemini AI (chatbot)
-- Cloudinary (image CDN)
-- date-fns + React Day Picker
-- Zod validation
-
-**Dev Tools**
-
-- PostHog analytics
-- ESLint + TypeScript
+| Category           | Technologies                                           |
+| ------------------ | ------------------------------------------------------ |
+| **Frontend**       | Next.js 16 (App Router) • React 19 • TypeScript        |
+| **Styling**        | Tailwind CSS v4 • Radix UI • shadcn/ui • Framer Motion |
+| **Backend**        | Next.js API Routes • NextAuth.js v5                    |
+| **Database**       | MongoDB Atlas • Mongoose ODM • Upstash Redis           |
+| **Authentication** | NextAuth.js v5 • bcryptjs                              |
+| **Validation**     | Zod Schemas                                            |
+| **AI & Services**  | Google Gemini AI • Cloudinary CDN • PostHog Analytics  |
+| **Utilities**      | date-fns • React Day Picker • Lucide Icons • Sonner    |
+| **Dev Tools**      | ESLint • TypeScript • Turbopack                        |
 
 ## How It Works
 
