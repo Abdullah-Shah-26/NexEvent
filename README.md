@@ -4,7 +4,6 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 🔗 **Live Demo:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
 
-
 ## Tech Stack
 
 **Core**
@@ -16,7 +15,7 @@ Event management platform for the developer community. Browse hackathons, meetup
 
 **UI/UX**
 
-- Tailwind CSS v4 + Radix UI + shadcn/ui 
+- Tailwind CSS v4 + Radix UI + shadcn/ui
 - Framer Motion + Motion Primitives
 - Lucide React icons
 - Sonner toast notifications
@@ -82,6 +81,95 @@ lib/
 └── mongoose.ts           # DB connection
 
 hooks/                    # Custom React hooks
+```
+
+## Architecture
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        A[Next.js Frontend<br/>React 19 + TypeScript]
+        A1[Pages<br/>Home, Events, Bookings]
+        A2[Components<br/>Navbar, EventCard, ChatBot]
+        A --> A1
+        A --> A2
+    end
+
+    subgraph "API Layer"
+        B[Next.js API Routes]
+        B1["API: Auth"]
+        B2["API: Events"]
+        B3["API: Favorites"]
+        B4["API: Chat"]
+        B --> B1
+        B --> B2
+        B --> B3
+        B --> B4
+    end
+
+    subgraph "Authentication"
+        C[NextAuth.js v5]
+        C1[Credentials Provider]
+        C2[MongoDB Adapter]
+        C --> C1
+        C --> C2
+    end
+
+    subgraph "Data Layer"
+        D[MongoDB Atlas]
+        D1[(Users)]
+        D2[(Events)]
+        D3[(Bookings)]
+        D4[(Favorites)]
+        D --> D1
+        D --> D2
+        D --> D3
+        D --> D4
+    end
+
+    subgraph "Caching"
+        E[Upstash Redis]
+        E1[Event Cache<br/>60s TTL]
+        E2[Query Cache<br/>5min TTL]
+        E --> E1
+        E --> E2
+    end
+
+    subgraph "External Services"
+        F[Cloudinary<br/>Image CDN]
+        G[Google Gemini AI<br/>Chatbot]
+        H[PostHog<br/>Analytics]
+    end
+
+    subgraph "Validation"
+        I[Zod Schemas]
+        I1[User Validation]
+        I2[Event Validation]
+        I3[Booking Validation]
+        I --> I1
+        I --> I2
+        I --> I3
+    end
+
+    A --> B
+    B --> C
+    B --> I
+    C --> D
+    B --> D
+    B --> E
+    B2 --> F
+    B4 --> G
+    A --> H
+
+    style A fill:#a855f7,stroke:#7c3aed,color:#fff
+    style B fill:#8b5cf6,stroke:#6d28d9,color:#fff
+    style C fill:#7c3aed,stroke:#5b21b6,color:#fff
+    style D fill:#6366f1,stroke:#4f46e5,color:#fff
+    style E fill:#ec4899,stroke:#db2777,color:#fff
+    style F fill:#f59e0b,stroke:#d97706,color:#fff
+    style G fill:#10b981,stroke:#059669,color:#fff
+    style H fill:#06b6d4,stroke:#0891b2,color:#fff
+    style I fill:#f97316,stroke:#ea580c,color:#fff
 ```
 
 ## Getting Started
