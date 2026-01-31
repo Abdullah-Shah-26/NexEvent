@@ -14,7 +14,7 @@ Event management platform for the developer community. Browse hackathons, meetup
 | **Database**       | MongoDB Atlas • Mongoose ODM • Upstash Redis           |
 | **Authentication** | NextAuth.js v5 • bcryptjs                              |
 | **Validation**     | Zod Schemas                                            |
-| **AI & Services**  | Google Gemini AI • Cloudinary CDN • PostHog Analytics  |
+| **AI & Services**  | OpenAI GPT-4 • Cloudinary CDN • PostHog Analytics      |
 | **Utilities**      | date-fns • React Day Picker • Lucide Icons • Sonner    |
 | **Dev Tools**      | ESLint • TypeScript • Turbopack                        |
 
@@ -123,7 +123,7 @@ graph TB
 
     subgraph "External Services"
         F[Cloudinary<br/>Image CDN]
-        G[Google Gemini AI<br/>Chatbot]
+        G[Open AI<br/>Chatbot]
         H[PostHog<br/>Analytics]
     end
 

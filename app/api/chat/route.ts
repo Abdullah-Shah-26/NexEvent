@@ -6,6 +6,29 @@ import { chatMessageSchema } from "@/lib/validations/chat.validation";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "demo-key");
 
+async function callOpenAI(prompt: string): Promise<string> {
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7,
+      max_tokens: 500,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`OpenAI API error: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -19,7 +42,7 @@ export async function POST(req: NextRequest) {
           message: firstError.message,
           field: firstError.path.join("."),
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -46,18 +69,12 @@ export async function POST(req: NextRequest) {
             e.location
           }\nVenue: ${e.venue}\nDescription: ${
             e.description
-          }\nTags: ${e.tags.join(", ")}\n`
+          }\nTags: ${e.tags.join(", ")}\n`,
       )
       .join("\n---\n");
 
     console.log("Events context length:", eventsContext.length);
 
-    console.log("Initializing Gemini AI...");
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-pro",
-    });
-
-    console.log("Generating response...");
     const prompt = `You are a helpful assistant for NexEvent, an event management platform for developers. 
 
 IMPORTANT: You MUST answer questions using ONLY the event data provided below. Do not make up information.
@@ -75,16 +92,34 @@ Instructions:
 
 Answer:`;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    let responseText: string;
 
-    console.log("Response generated successfully");
-    return NextResponse.json({ response: text });
+    try {
+      console.log("Trying Gemini AI...");
+      const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-pro",
+      });
+
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      responseText = response.text();
+      console.log("Gemini response generated successfully");
+    } catch (geminiError) {
+      console.error("Gemini AI failed, falling back to OpenAI:", geminiError);
+
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error("Both Gemini and OpenAI are unavailable");
+      }
+
+      console.log("Using OpenAI fallback...");
+      responseText = await callOpenAI(prompt);
+      console.log("OpenAI response generated successfully");
+    }
+
+    return NextResponse.json({ response: responseText });
   } catch (error) {
     console.error("Chat error details:", error);
 
-    // Return a user-friendly error message in the response field
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error occurred";
     console.error("Error message:", errorMessage);
@@ -95,7 +130,7 @@ Answer:`;
           "I'm having trouble connecting right now. Please try again in a moment.",
         error: errorMessage,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
