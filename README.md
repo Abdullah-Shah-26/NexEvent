@@ -160,13 +160,13 @@ graph TB
 
 ## Screenshots
 
-| | |
-| --- | --- |
-| **Home Page (1)**<br/>![Home page 1](public/screenshots/Home-Page-1.png) | **Home Page (2)**<br/>![Home page 2](public/screenshots/Home-Page-2.png) |
-| **Login Page**<br/>![Login page](public/screenshots/Login.png) | **Signup Page**<br/>![Signup page](public/screenshots/SignUp-Page.png) |
-| **Events Page (1)**<br/>![Events page 1](public/screenshots/Events-Page-1.png) | **Events Page (2)**<br/>![Events page 2](public/screenshots/Events-Page-2.png) |
-| **Guest Favourite Events**<br/>![Guest favourite events](public/screenshots/Guest-Favourite-Events.png) | **Guest Register Events**<br/>![Guest register events](public/screenshots/Guest-Register-Events.png) |
-| **Organizer Add Event**<br/>![Organizer add event](public/screenshots/Organizer-Can-Add-Event.png) | **Organizer Event Management**<br/>![Organizer event management](public/screenshots/Oraganizer-Event-Management.png) |
+|                                                                                                         |                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Home Page (1)**<br/>![Home page 1](public/screenshots/Home-Page-1.png)                                | **Home Page (2)**<br/>![Home page 2](public/screenshots/Home-Page-2.png)                                             |
+| **Login Page**<br/>![Login page](public/screenshots/Login.png)                                          | **Signup Page**<br/>![Signup page](public/screenshots/SignUp-Page.png)                                               |
+| **Events Page (1)**<br/>![Events page 1](public/screenshots/Events-Page-1.png)                          | **Events Page (2)**<br/>![Events page 2](public/screenshots/Events-Page-2.png)                                       |
+| **Guest Favourite Events**<br/>![Guest favourite events](public/screenshots/Guest-Favourite-Events.png) | **Guest Register Events**<br/>![Guest register events](public/screenshots/Guest-Register-Events.png)                 |
+| **Organizer Add Event**<br/>![Organizer add event](public/screenshots/Organizer-Can-Add-Event.png)      | **Organizer Event Management**<br/>![Organizer event management](public/screenshots/Oraganizer-Event-Management.png) |
 
 ## Getting Started
 
