@@ -2,7 +2,7 @@
 
 Event management platform for the developer community. Browse hackathons, meetups, & conferences, or create and manage your own events.
 
-🔗 **Live Demo:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
+🔗 **Live Preview:** [https://nex-event-flax.vercel.app](https://nex-event-flax.vercel.app)
 
 ## Tech Stack
 
