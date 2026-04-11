@@ -28,8 +28,6 @@ Event management platform for the developer community. Browse hackathons, meetup
 - **Calendar Integration** - Add events to Google Calendar
 - **AI Chatbot** - Ask questions about events and get instant answers
 
----
-
 ## Security & Performance
 
 ### Security
